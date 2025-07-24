@@ -95,7 +95,7 @@
 
     <div id="dashboard-page" class="page">
         <div class="relative min-h-screen md:flex">
-            <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-50 z-20 hidden md:hidden"></div>
+            <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden md:hidden"></div>
             <div id="sidebar" class="bg-white text-gray-800 w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-200 ease-in-out z-30 shadow-lg flex flex-col">
               <div>
                 <div class="flex items-center justify-between px-4">
@@ -186,83 +186,11 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       /* ---------- MOCK DB ---------- */
-     const sprFacilities = [
-        {
-          id: 'vibe-t2k-289',
-          name: 'Unholtz Dickie Shaker (T2K)',
-          shortDesc: '18"x18" slip plate shaker for vibration and shock testing up to 2000 Hz.',
-          image: 'images/VibeTable1.jpg',
-          longDesc: 'The Unholtz Dickie T2K is a versatile electrodynamic shaker located in SPRL room 1007, designed for a wide range of vibration testing applications.',
-          specs: {
-            'Model': 'T2K',
-            'Serial Number': '289',
-            'Property Number': 'UN282030',
-            'Plate Size': '18" x 18" slip plate',
-            'Stinger Diameter': '13.5 inches',
-            'Frequency Range': '5 - 2000 Hz',
-            'Max Acceleration': '61 G',
-            'Sine Force': '1,700 lbf peak',
-            'Random Force': '1,330 lbf RMS'
-          }
-        },
-        {
-          id: 'vibe-s600',
-          name: 'Unholtz Dickie Shaker (S600)',
-          shortDesc: '25"x25" slip plate shaker for larger articles and higher force requirements.',
-          image: 'images/VibeTable2.jpg',
-          longDesc: 'Located in SPRL room 1007, the Unholtz Dickie S600 provides increased capacity for larger test articles, delivering up to 7,000 lbs of force.',
-          specs: {
-            'Model': 'S600',
-            'Plate Size': '25" x 25" slip plate',
-            'Stinger Diameter': '13.5 inches',
-            'Frequency Range': '2.5 - 2000 Hz',
-            'Force Rating': '7,000 lbs',
-            'Sine Force': '6,500 lbf peak',
-            'Random Force': '5,700 lbf RMS'
-          }
-        },
-        {
-          id: 'tvac-bemco',
-          name: 'Thermal Vacuum Chamber (BEMCO)',
-          shortDesc: '27.3 cubic feet TVAC chamber for simulating the vacuum and thermal conditions of space.',
-          image: 'images/ThermalVacc1.jpg',
-          longDesc: 'Our BEMCO TVAC chamber in SPRL room 1065 is ideal for component and subsystem level testing, allowing for precise control of temperature and pressure.',
-          specs: {
-            'Model': 'Aein SC/USSC 28',
-            'Property Number': 'UN237936',
-            'Volume': '27.3 cubic feet',
-            'Temperature Range': '-55°C to +150°C',
-            'Max Ramp Rate': '3.5°C per minute',
-            'Vacuum Level': '5 x 10⁻⁶ Torr'
-          }
-        },
-        {
-          id: 'thermal-csz',
-          name: 'Thermal Chamber (Cincinnati Sub-Zero)',
-          shortDesc: '32 cubic feet chamber for temperature and humidity cycling at ambient pressure.',
-          image: 'images/Thermal1.jpg',
-          longDesc: 'This Tenney-made chamber from Cincinnati Sub-Zero (room 1065) provides a large volume for thermal and humidity testing of articles that do not require vacuum.',
-          specs: {
-            'Model': 'Q-32-11-SC/AC',
-            'Volume': '32 cubic feet',
-            'Internal Dimensions': '38"W x 38"D x 38"H',
-            'Temperature Range': '-65°C to +190°C',
-            'Humidity Range': '10% to 98% RH'
-          }
-        },
-        {
-          id: 'vacuum-tsc',
-          name: 'Vacuum Chamber (TSC-150)',
-          shortDesc: 'High-performance vacuum chamber equipped with a turbomolecular pump.',
-          image: 'images/Vacc1.jpg',
-          longDesc: 'The TSC-150 in room 1065 is designed for bakeouts and vacuum exposure testing. Its turbomolecular pump ensures a clean, high-vacuum environment.',
-          specs: {
-            'Model': 'TSC-150',
-            'Pump Type': 'Turbomolecular Pump',
-            'Primary Use': 'Vacuum Bakeout, Material Outgassing'
-          }
-        }
-      ];
+      const sprFacilities = [ { id: 'vibe-t2k-289', name: 'Vibration Table (Unholtz Dickie T2K)', shortDesc: '18"x18" slip plate shaker for vibration and shock testing up to 2000 Hz.', image: 'images/VibeTable1.jpg', longDesc: 'The Unholtz Dickie T2K is a versatile electrodynamic shaker located in SPRL room 1007, designed for a wide range of vibration testing applications.', specs: { 'Model': 'T2K', 'Serial Number': '289', 'Property Number': 'UN282030', 'Plate Size': '18" x 18" slip plate', 'Stinger Diameter': '13.5 inches', 'Frequency Range': '5 - 2000 Hz', 'Max Acceleration': '61 G', 'Sine Force': '1,700 lbf peak', 'Random Force': '1,330 lbf RMS', 'Documentation': 'Detailed hole pattern and specs available upon request.' } }, { id: 'vibe-s600', name: 'Vibration Table (Unholtz Dickie S600)', shortDesc: '25"x25" slip plate shaker for larger articles and higher force requirements.', image: 'images/VibeTable2.jpg', longDesc: 'Located in SPRL room 1007, the Unholtz Dickie S600 provides increased capacity for larger test articles, delivering up to 7,000 lbs of force.', specs: { 'Model': 'S600', 'Plate Size': '25" x 25" slip plate', 'Stinger Diameter': '13.5 inches', 'Frequency Range': '2.5 - 2000 Hz', 'Force Rating': '7,000 lbs', 'Sine Force': '6,500 lbf peak', 'Random Force': '5,700 lbf RMS', 'Documentation': 'Detailed hole pattern and specs available upon request.' } }, { id: 'tvac-bemco', name: 'Thermal Vacuum Chamber (BEMCO)', shortDesc: '27.3 cubic feet TVAC chamber for simulating the vacuum and thermal conditions of space.', image: 'images/BEMCO Aein SCUSSC 28.jpg', longDesc: 'Our BEMCO TVAC chamber in SPRL room 1065 is ideal for component and subsystem level testing, allowing for precise control of temperature and pressure to mimic various orbital environments.', specs: { 'Model': 'Aein SC/USSC 28', 'Property Number': 'UN237936', 'Volume': '27.3 cubic feet', 'Temperature Range': '-55°C to +150°C', 'Max Ramp Rate': '3.5°C per minute', 'Vacuum Level': '5 x 10⁻⁶ Torr' } }, { id: 'thermal-csz', name: 'Thermal Chamber (Cincinnati Sub-Zero)', shortDesc: '32 cubic feet chamber for temperature and humidity cycling at ambient pressure.', image: 'images/ThermalVacc1.jpg', longDesc: 'This Tenney-made chamber from Cincinnati Sub-Zero (room 1065) provides a large volume for thermal and humidity testing of articles that do not require vacuum.', specs: { 'Model': 'Q-32-11-SC/AC', 'Volume': '32 cubic feet', 'Internal Dimensions': '38"W x 38"D x 38"H', 'Temperature Range': '-65°C to +190°C', 'Humidity Range': '10% to 98% RH' } }, { id: 'vacuum-tsc', name: 'Vacuum Chamber (TSC-150)', shortDesc: 'High-performance vacuum chamber equipped with a turbomolecular pump.', image: 'images/Vacc1.jpg', longDesc: 'The TSC-150 in room 1065 is designed for bakeouts and vacuum exposure testing where precise thermal control is not required. Its turbomolecular pump ensures rapid pump-down and a clean, high-vacuum environment.', specs: { 'Model': 'TSC-150', 'Pump Type': 'Turbomolecular Pump', 'Primary Use': 'Vacuum Bakeout, Material Outgassing', 'Controller': 'Frequency Converter for precision pump control' } } ];
+      const mockFacilities = [ { id: 'fac_1', name: 'Aero-Enviro Labs', blurb: 'Aero-Enviro Labs specializes in dynamic and thermal testing for CubeSats and small-to-medium components.' }, { id: 'fac_2', name: 'Dynamic Test Solutions', blurb: 'DTS is a leader in high-G shock and vibration testing for military and aerospace hardware.' }, { id: 'fac_3', name: 'Cryo-Vac Specialists', blurb: 'Cryo-Vac offers extreme temperature ranges perfect for deep space simulations.' } ];
+      let mockCampaigns = JSON.parse(localStorage.getItem('tb_campaigns') || '[]');
+      if (mockCampaigns.length === 0) { mockCampaigns = [{ id: 'campaign_0', companyName: 'Example Corp', testPurpose: 'Initial Demo Campaign', testBackground: 'This is a sample campaign to demonstrate the dashboard functionality.', createdAt: new Date(Date.now() - 86400000 * 10), status: 'Complete', tests: [{ type: 'Vibration', details: { 'Test Axes': 'X, Y, Z', 'Standard': 'GEVS' } }] }]; }
+
       /* ---------- DOM SELECTIONS ---------- */
       const publicPage = document.getElementById('public-page');
       const dashboardPage = document.getElementById('dashboard-page');
@@ -320,7 +248,49 @@
       /* ---------- HANDLERS ---------- */
       function handleLogin(e) { e.preventDefault(); showPage('dashboard'); showDashboardView('dashboard'); loadCampaigns(); hideModal(loginModal); const newMatchId = sessionStorage.getItem('newlyMatchedFacilityId'); if (newMatchId) { const facility = mockFacilities.find(f => f.id === newMatchId); if (facility) { document.getElementById('facility-name').textContent = facility.name; document.getElementById('facility-blurb').textContent = facility.blurb; showModal(facilityIntroModal); } sessionStorage.removeItem('newlyMatchedFacilityId'); } }
       function handleLogout() { currentCampaignId = null; showPage('public'); showPublicSection('home-content'); }
-      function handleInitialSignup(e) { e.preventDefault(); for (let i = 0; i < signupFormSteps.length; i++) { const step = signupFormSteps[i]; const inputs = step.querySelectorAll('input[required], textarea[required], select[required]'); for (const input of inputs) { if (!input.value.trim()) { signupFormSteps.forEach(s => s.classList.remove('active')); step.classList.add('active'); currentSignupStep = i + 1; document.getElementById('prev-btn').style.display = currentSignupStep > 1 ? 'block' : 'none'; document.getElementById('next-btn').style.display = currentSignupStep < signupFormSteps.length ? 'block' : 'none'; document.getElementById('submit-btn').style.display = currentSignupStep === signupFormSteps.length ? 'block' : 'none'; showMessage('Incomplete Form', `Please complete all required fields on Step ${currentSignupStep}.`); input.focus(); return; } } } try{ const formData = new FormData(signupForm); const primaryDetails = Object.fromEntries(formData.entries()); const matchedFacility = matchFacility(primaryDetails); const firstTest = { type: primaryDetails.PrimaryTestType, details: { 'Initial Test Type': primaryDetails.PrimaryTestType, 'Initial Frequency Range': primaryDetails.FreqRange, 'Initial Temperature Range': primaryDetails.TempRange, 'Initial Shock Range': primaryDetails.ShockRange } }; const newCampaign = { id: `campaign_${Date.now()}`, companyName: primaryDetails.CompanyName, testPurpose: primaryDetails.TestPurpose, testBackground: `Initial campaign for ${primaryDetails.PrimaryTestType} testing.`, createdAt: new Date(), status: 'Awaiting Facility Response', tests: [firstTest], facilityId: matchedFacility.id }; mockCampaigns.unshift(newCampaign); saveCampaigns(); sessionStorage.setItem('newlyMatchedFacilityId', matchedFacility.id); handleLogin({preventDefault:()=>{}}); }catch(err){ console.error('Signup error', err); alert('There was an error creating your account. Check console.'); } }
+      
+      // FIXED SIGNUP HANDLER
+      function handleInitialSignup(e) {
+        e.preventDefault();
+        
+        // The step-by-step validation in the 'Next' button handler is sufficient.
+        // This removes the logic that caused the "not focusable" error.
+        try {
+          const formData = new FormData(signupForm);
+          const primaryDetails = Object.fromEntries(formData.entries());
+          const matchedFacility = matchFacility(primaryDetails);
+
+          const firstTest = {
+            type: primaryDetails.PrimaryTestType,
+            details: {
+              'Initial Test Type': primaryDetails.PrimaryTestType,
+              'Initial Frequency Range': primaryDetails.FreqRange,
+              'Initial Temperature Range': primaryDetails.TempRange,
+              'Initial Shock Range': primaryDetails.ShockRange
+            }
+          };
+
+          const newCampaign = {
+            id: `campaign_${Date.now()}`,
+            companyName: primaryDetails.CompanyName,
+            testPurpose: primaryDetails.TestPurpose,
+            testBackground: `Initial campaign for ${primaryDetails.PrimaryTestType} testing.`,
+            createdAt: new Date(),
+            status: 'Awaiting Facility Response',
+            tests: [firstTest],
+            facilityId: matchedFacility.id
+          };
+          mockCampaigns.unshift(newCampaign);
+          saveCampaigns();
+
+          sessionStorage.setItem('newlyMatchedFacilityId', matchedFacility.id);
+          handleLogin({preventDefault:()=>{}});
+        } catch(err) {
+          console.error('Signup error', err);
+          alert('There was an error creating your account. Check console.');
+        }
+      }
+
       function handleCreateNewCampaign(e) { e.preventDefault(); const fd = new FormData(newCampaignForm); const newCampaign = { id: `campaign_${Date.now()}`, companyName: mockCampaigns[0]?.companyName || 'New Client', testPurpose: fd.get('TestPurpose'), testBackground: fd.get('TestBackground'), createdAt: new Date(), status: 'New Request', tests: [] }; mockCampaigns.unshift(newCampaign); saveCampaigns(); loadCampaigns(); hideModal(newCampaignModal); }
       function handleAddTest(e) { e.preventDefault(); if (!currentCampaignId) return; const campaign = mockCampaigns.find(c => c.id === currentCampaignId); if (!campaign) return; const testType = addTestForm.querySelector('#new-test-type-select').value; if (!testType) { showMessage('Error', 'Please select a test type.'); return; } const details = {}; const inputs = addTestForm.querySelectorAll('.specific-fields input, .specific-fields select, .specific-fields textarea'); inputs.forEach(input => { const label = input.closest('div').querySelector('label'); if (label) { details[label.textContent.replace('i','').trim()] = input.value || 'N/A'; } }); details['Standard'] = addTestForm.querySelector('#test-standard-select').value; campaign.tests.push({ type: testType, details: details }); campaign.status = "Facility Matching"; renderTestsForCampaign(campaign.id); hideModal(addTestModal); showMessage('Test Added', `A new ${testType} test has been added. We are now matching you with qualified facilities.`); const statusBadge = document.getElementById('detail-campaign-status'); statusBadge.textContent = campaign.status; statusBadge.className = `status-badge status-${campaign.status.toLowerCase().replace(/ /g, '')}`; loadCampaigns(); }
       
