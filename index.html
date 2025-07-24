@@ -186,11 +186,83 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       /* ---------- MOCK DB ---------- */
-      const sprFacilities = [ { id: 'vibe-lab', name: 'Vibration & Shock Lab', shortDesc: 'State-of-the-art shakers for sine, random, and shock testing across all three axes.', image: 'https://placehold.co/600x400/3b82f6/ffffff?text=Vibe+Lab', longDesc: 'Our Vibration & Shock Lab is equipped with multiple electrodynamic shakers capable of simulating launch and operational environments. We support everything from component-level tests to fully integrated systems, ensuring your hardware is flight-ready.', specs: { 'Force Rating': 'Up to 25,000 lbf', 'Frequency Range': '5 - 3,000 Hz', 'Max Payload': '1,500 lbs', 'Capabilities': 'Sine, Random, Sine-on-Random, Shock (SRS)' } }, { id: 'tvac-chamber', name: 'Thermal Vacuum (TVAC) Chamber', shortDesc: 'Simulate the harsh environment of space with our high-fidelity TVAC chambers.', image: 'https://placehold.co/600x400/8b5cf6/ffffff?text=TVAC+Chamber', longDesc: 'Our TVAC facilities replicate the vacuum and extreme temperature cycles of space. With multiple chamber sizes and extensive data acquisition systems, we verify the performance and survivability of your hardware in its operational environment.', specs: { 'Chamber Size': 'Up to 10 ft. diameter x 15 ft. length', 'Temperature Range': '-180°C to +150°C', 'Ultimate Vacuum': '1x10⁻⁷ Torr', 'Features': 'Cryogenic shrouds, quartz lamp heating arrays' } }, { id: 'emi-lab', name: 'EMI/EMC Anechoic Chamber', shortDesc: 'Ensure electromagnetic compatibility with our certified anechoic chamber testing.', image: 'https://placehold.co/600x400/10b981/ffffff?text=EMI/EMC+Lab', longDesc: 'Our certified anechoic chamber is designed to test for radiated emissions and susceptibility, ensuring your electronic components do not interfere with each other or the launch vehicle. We test to all major military and commercial standards.', specs: { 'Chamber Type': 'Fully anechoic, ferrite and absorber lined', 'Frequency Range': '10 kHz - 40 GHz', 'Standards': 'MIL-STD-461, DO-160', 'Support': 'High-power amplifiers, automated test software' } } ];
-      const mockFacilities = [ { id: 'fac_1', name: 'Aero-Enviro Labs', blurb: 'Aero-Enviro Labs specializes in dynamic and thermal testing for CubeSats and small-to-medium components.' }, { id: 'fac_2', name: 'Dynamic Test Solutions', blurb: 'DTS is a leader in high-G shock and vibration testing for military and aerospace hardware.' }, { id: 'fac_3', name: 'Cryo-Vac Specialists', blurb: 'Cryo-Vac offers extreme temperature ranges perfect for deep space simulations.' } ];
-      let mockCampaigns = JSON.parse(localStorage.getItem('tb_campaigns') || '[]');
-      if (mockCampaigns.length === 0) { mockCampaigns = [{ id: 'campaign_0', companyName: 'Example Corp', testPurpose: 'Initial Demo Campaign', testBackground: 'This is a sample campaign to demonstrate the dashboard functionality.', createdAt: new Date(Date.now() - 86400000 * 10), status: 'Complete', tests: [{ type: 'Vibration', details: { 'Test Axes': 'X, Y, Z', 'Standard': 'GEVS' } }] }]; }
-
+     const sprFacilities = [
+        {
+          id: 'vibe-t2k-289',
+          name: 'Unholtz Dickie Shaker (T2K)',
+          shortDesc: '18"x18" slip plate shaker for vibration and shock testing up to 2000 Hz.',
+          image: 'images/Unholtz Dickie T2K SN 289.jpg',
+          longDesc: 'The Unholtz Dickie T2K is a versatile electrodynamic shaker located in SPRL room 1007, designed for a wide range of vibration testing applications.',
+          specs: {
+            'Model': 'T2K',
+            'Serial Number': '289',
+            'Property Number': 'UN282030',
+            'Plate Size': '18" x 18" slip plate',
+            'Stinger Diameter': '13.5 inches',
+            'Frequency Range': '5 - 2000 Hz',
+            'Max Acceleration': '61 G',
+            'Sine Force': '1,700 lbf peak',
+            'Random Force': '1,330 lbf RMS'
+          }
+        },
+        {
+          id: 'vibe-s600',
+          name: 'Unholtz Dickie Shaker (S600)',
+          shortDesc: '25"x25" slip plate shaker for larger articles and higher force requirements.',
+          image: 'images/Unholtz Dickie S600.jpg',
+          longDesc: 'Located in SPRL room 1007, the Unholtz Dickie S600 provides increased capacity for larger test articles, delivering up to 7,000 lbs of force.',
+          specs: {
+            'Model': 'S600',
+            'Plate Size': '25" x 25" slip plate',
+            'Stinger Diameter': '13.5 inches',
+            'Frequency Range': '2.5 - 2000 Hz',
+            'Force Rating': '7,000 lbs',
+            'Sine Force': '6,500 lbf peak',
+            'Random Force': '5,700 lbf RMS'
+          }
+        },
+        {
+          id: 'tvac-bemco',
+          name: 'Thermal Vacuum Chamber (BEMCO)',
+          shortDesc: '27.3 cubic feet TVAC chamber for simulating the vacuum and thermal conditions of space.',
+          image: 'images/BEMCO Aein SCUSSC 28.jpg',
+          longDesc: 'Our BEMCO TVAC chamber in SPRL room 1065 is ideal for component and subsystem level testing, allowing for precise control of temperature and pressure.',
+          specs: {
+            'Model': 'Aein SC/USSC 28',
+            'Property Number': 'UN237936',
+            'Volume': '27.3 cubic feet',
+            'Temperature Range': '-55°C to +150°C',
+            'Max Ramp Rate': '3.5°C per minute',
+            'Vacuum Level': '5 x 10⁻⁶ Torr'
+          }
+        },
+        {
+          id: 'thermal-csz',
+          name: 'Thermal Chamber (Cincinnati Sub-Zero)',
+          shortDesc: '32 cubic feet chamber for temperature and humidity cycling at ambient pressure.',
+          image: 'images/Q-32-11-SCAC Cincinnati Sub-Zero, Tenney.jpg',
+          longDesc: 'This Tenney-made chamber from Cincinnati Sub-Zero (room 1065) provides a large volume for thermal and humidity testing of articles that do not require vacuum.',
+          specs: {
+            'Model': 'Q-32-11-SC/AC',
+            'Volume': '32 cubic feet',
+            'Internal Dimensions': '38"W x 38"D x 38"H',
+            'Temperature Range': '-65°C to +190°C',
+            'Humidity Range': '10% to 98% RH'
+          }
+        },
+        {
+          id: 'vacuum-tsc',
+          name: 'Vacuum Chamber (TSC-150)',
+          shortDesc: 'High-performance vacuum chamber equipped with a turbomolecular pump.',
+          image: 'images/TSC-150 Turbomolecular Pump Frequency Converter.jpg',
+          longDesc: 'The TSC-150 in room 1065 is designed for bakeouts and vacuum exposure testing. Its turbomolecular pump ensures a clean, high-vacuum environment.',
+          specs: {
+            'Model': 'TSC-150',
+            'Pump Type': 'Turbomolecular Pump',
+            'Primary Use': 'Vacuum Bakeout, Material Outgassing'
+          }
+        }
+      ];
       /* ---------- DOM SELECTIONS ---------- */
       const publicPage = document.getElementById('public-page');
       const dashboardPage = document.getElementById('dashboard-page');
